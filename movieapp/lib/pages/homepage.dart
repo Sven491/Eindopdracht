@@ -16,15 +16,20 @@ class HomePage extends StatelessWidget {
             child: Text('Drawer Header'),
           ),
           ListTile(
-            title: const Text('Item 1'),
+            title: const Text('Home'),
             onTap: () {
-
+              Navigator.pushNamed(context, '/home');
             },
           ),
           ListTile(
-            title: const Text('Item 2'),
+            title: const Text('Watchlist'),
             onTap: () {
-            },
+            Navigator.pushNamed(context, '/list');},
+          ),
+          ListTile(
+            title: const Text('account'),
+            onTap: () {
+            Navigator.pushNamed(context, '/account');},
           ),
         ],
       ),
@@ -33,13 +38,13 @@ class HomePage extends StatelessWidget {
           body: Center(
             child: Row(
               children: [
-                IconButton(
-                  icon: Icon(Icons.list),
-                  onPressed:() {
-                    Navigator.pushNamed(context, '/list');
-                  },
+                Container(
+                   child: Column(
+                     children: [
+                       Text('Home Page'),
+                     ],
+                   )
                 ),
-
               ],
             ),
           ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:movieapp/pages/account.dart';
 import 'package:movieapp/pages/homepage.dart';
 import 'package:movieapp/pages/listpage.dart';
 
@@ -22,6 +23,7 @@ class MyApp extends StatelessWidget {
       routes: {
         '/home': (context) => const HomePage(),
         '/list': (context) => const Listpage(),
+        '/account': (context) => const AccountPage()
       },
     );
   }
