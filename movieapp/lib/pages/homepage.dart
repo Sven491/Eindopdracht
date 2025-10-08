@@ -29,7 +29,7 @@ class HomePage extends StatelessWidget {
         ],
       ),
     ),
-      appBar: AppBar(title: Text('Home sigma Page'),),
+      appBar: AppBar(title: Text('Home Page'),),
           body: Center(
             child: Row(
               children: [
