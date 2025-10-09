@@ -52,7 +52,6 @@ google-services.json
 GoogleService-Info.plist
 
 # ===== Version control (just in case) =====
-.git/
 .gitignore
 
 # ===== Other =====
