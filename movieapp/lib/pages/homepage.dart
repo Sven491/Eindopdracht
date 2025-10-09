@@ -1,3 +1,5 @@
+// ignore_for_file: unnecessary_const
+
 import 'package:flutter/material.dart';
 
 class HomePage extends StatelessWidget {
@@ -13,23 +15,30 @@ class HomePage extends StatelessWidget {
         children: [
           const DrawerHeader(
             decoration: BoxDecoration(color: Color(0xFF551B14)),
-            child: Text('Drawer Header'),
+            child: Center(
+              child: CircleAvatar(
+                radius: 40,
+                backgroundImage: AssetImage('movieapp\images\Movielist_logo.png'),  
+                ),
+          ),
           ),
           ListTile(
             title: const Text('Home'),
             onTap: () {
-              Navigator.pushNamed(context, '/home');
-            },
+            Navigator.pushNamed(context, '/home');
+            Navigator.pop(context);},
           ),
           ListTile(
             title: const Text('Watchlist'),
             onTap: () {
-            Navigator.pushNamed(context, '/list');},
+            Navigator.pushNamed(context, '/list');
+            Navigator.pop(context);},
           ),
           ListTile(
             title: const Text('account'),
             onTap: () {
-            Navigator.pushNamed(context, '/account');},
+            Navigator.pushNamed(context, '/account');
+            Navigator.pop(context);},
           ),
         ],
       ),
