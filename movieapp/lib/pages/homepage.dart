@@ -1,4 +1,6 @@
-import 'package:MovieList/model/GET_discover.dart';
+// ignore_for_file: library_private_types_in_public_api
+
+import 'package:MovieList/model/GET.dart';
 import 'package:MovieList/services/remote_service.dart';
 import 'package:flutter/material.dart';
 
@@ -21,7 +23,7 @@ class _HomePageState extends State<Homepage> {
   }
 
   getData() async{
-    discoverMovies =  await RemoteService().getDiscovery();
+    discoverMovies =  await RemoteDiscoveryService().getDiscovery();
     if(discoverMovies != null){
       setState(() {
         isLoaded = true;
@@ -40,16 +42,31 @@ class _HomePageState extends State<Homepage> {
         replacement: const Center(
           child: CircularProgressIndicator(),
         ),
-        child: ListView.builder(
+        child: GridView.builder(
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2,
+              mainAxisSpacing: 30.0,
+              crossAxisSpacing: 10.0,
+              childAspectRatio: 0.6
+            ),
             itemCount: discoverMovies?.results.length,
             itemBuilder: (context, index) {
               final movie = discoverMovies!.results[index];
-              return Padding(
-                padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
-                child: Text(
-                  movie.title,
-                  style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              return Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(12),
+                  color: Colors.grey[200],
                 ),
+                child: Column (
+                children: [
+                ClipRRect(borderRadius: BorderRadiusGeometry.circular(6), child: Image.network('https://image.tmdb.org/t/p/w500${movie.posterPath}')),
+                Text(
+                  movie.title,
+                  style: const TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+                  overflow: TextOverflow.ellipsis,
+                ),
+                ]
+                )
               );
             },
           ),

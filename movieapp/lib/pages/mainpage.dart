@@ -24,15 +24,15 @@ class _MainPageState extends State<MainPage> {
 
   final List<Widget> pages = [
     const Homepage(),
-    const Listpage(),
     const Search(),
+    const Listpage(),
     const Account(),
   ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey[200],
+      backgroundColor: Color(0xFF121212),
         /* drawer: Drawer(
         child: ListView(
         padding: EdgeInsets.zero,
@@ -67,7 +67,10 @@ class _MainPageState extends State<MainPage> {
         ],
       ),
     ), */
-      appBar: AppBar(title: Text('Home'),),
+      appBar: AppBar(
+        title: Text('MovieLovr.'),
+        backgroundColor: Color(0xFF330101),
+      ),
       bottomNavigationBar: BottomNavbar(
         onTabChange: (index) => navigateBottomBar(index),
       ),    

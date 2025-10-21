@@ -2,6 +2,8 @@
 //
 //     final tmdbDiscover = tmdbDiscoverFromJson(jsonString);
 
+// ignore_for_file: file_names
+
 import 'dart:convert';
 
 TmdbDiscover tmdbDiscoverFromJson(String str) => TmdbDiscover.fromJson(json.decode(str));
