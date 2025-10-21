@@ -21,13 +21,15 @@ class MyApp extends StatelessWidget {
   
   @override
   Widget build(BuildContext context) {
+    final session = Supabase.instance.client.auth.currentSession;
+
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Movie App',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
         useMaterial3: true,),
-      home: LoginPage(),
+      home: session != null ? const MainPage() : const LoginPage(),
       initialRoute: '/',
       routes: {
         '/main': (context) => MainPage(),
