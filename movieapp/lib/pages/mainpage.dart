@@ -24,7 +24,7 @@ class _MainPageState extends State<MainPage> {
 
   final List<Widget> pages = [
     const Homepage(),
-    const Search(),
+    const Searchpage(),
     const Listpage(),
     const Account(),
   ];

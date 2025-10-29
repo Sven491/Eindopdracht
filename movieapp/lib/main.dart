@@ -5,6 +5,7 @@ import 'package:MovieList/pages/loginpage.dart';
 import 'package:MovieList/pages/mainpage.dart';
 import 'package:MovieList/pages/listpage.dart';
 import 'package:MovieList/pages/search.dart';
+import 'package:MovieList/pages/detailpage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -42,7 +43,8 @@ class MyApp extends StatelessWidget {
         '/home': (context) => Homepage(),
         '/list': (context) => Listpage(),
         '/account': (context) => Account(),
-        '/search': (context) => Search(),
+        '/search': (context) => Searchpage(),
+        '/detail': (context) => DetailPage(),
       },
     );
   }

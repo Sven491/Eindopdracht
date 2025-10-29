@@ -59,12 +59,17 @@ class _HomePageState extends State<Homepage> {
                 ),
                 child: Column (
                 children: [
-                ClipRRect(borderRadius: BorderRadiusGeometry.circular(6), child: Image.network('https://image.tmdb.org/t/p/w500${movie.posterPath}')),
-                Text(
-                  movie.title,
-                  style: const TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
-                  overflow: TextOverflow.ellipsis,
-                ),
+                  InkWell( 
+                    onTap: () {Navigator.pushNamed(context, '/detail', 
+                      arguments: {
+                        'id': movie.id,
+                        'title': movie.title,
+                        'posterPath': movie.posterPath,
+                        'overview': movie.overview,
+                        });}, 
+                    splashColor: Colors.white10, 
+                    child: ClipRRect(borderRadius: BorderRadiusGeometry.circular(6), child: Image.network('https://image.tmdb.org/t/p/w500${movie.posterPath}'))), 
+                    Text( movie.title, style: const TextStyle(fontSize: 15, fontWeight: FontWeight.bold), overflow: TextOverflow.ellipsis,),
                 ]
                 )
               );
