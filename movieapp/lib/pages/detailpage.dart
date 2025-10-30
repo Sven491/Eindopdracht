@@ -82,7 +82,7 @@ class _DetailPageState extends State<DetailPage> {
                   Text(
                     '$movieTitle',
                     style: const TextStyle(
-                      color: Colors.white,
+                      color:    Colors.white,
                       fontSize: 28,
                       fontWeight: FontWeight.bold,
                     ),
