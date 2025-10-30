@@ -49,7 +49,7 @@ class _DetailPageState extends State<DetailPage> {
       body: Column(
         children: [
           Center ( child:
-          Text('$movieTitle', style: const TextStyle(fontSize: 40, color: Colors.white)),
+          Text('movieTitle', style: const TextStyle(fontSize: 40, color: Colors.white)),
           ),
           Row (
             mainAxisAlignment: MainAxisAlignment.center,
@@ -58,7 +58,7 @@ class _DetailPageState extends State<DetailPage> {
               const SizedBox(width: 20,),
               Container(
                 width: 200,
-                child: Text('$movieDescription', style: const TextStyle(fontSize: 20, color: Colors.white),),
+                child: Text('movieDescription', style: const TextStyle(fontSize: 20, color: Colors.white),),
               ),
             ],
           ),
