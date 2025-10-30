@@ -53,7 +53,6 @@ class _DetailPageState extends State<DetailPage> {
             ? 'https://image.tmdb.org/t/p/w500$movieImage'
             : 'https://www.content.numetro.co.za/ui_images/no_poster.png', fit: BoxFit.cover,)    
           ),
-
           BackdropFilter(
             filter: ImageFilter.blur(sigmaX: 12, sigmaY: 12),
             child: Container(color: Colors.black.withOpacity(0.3)),
@@ -71,6 +70,21 @@ class _DetailPageState extends State<DetailPage> {
             ),
           ),
           Align(
+            alignment: Alignment.topCenter,
+            child: Padding(
+              padding: const EdgeInsets.only(top: 100),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(12),
+                child: Image.network(
+                (movieImage != null && movieImage!.isNotEmpty)
+                ? ('https://image.tmdb.org/t/p/w500$movieImage')
+                : ('https://www.content.numetro.co.za/ui_images/no_poster.png'),
+                fit:BoxFit.cover,
+                height: 400,),
+              ),
+            ),
+          ),
+          Align(
             alignment: Alignment.bottomCenter,
             child: Padding(
               padding: const EdgeInsets.all(20),
@@ -78,18 +92,15 @@ class _DetailPageState extends State<DetailPage> {
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-
                   Text(
                     '$movieTitle',
                     style: const TextStyle(
-                      color:    Colors.white,
+                      color: Colors.white,
                       fontSize: 28,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-
                   const SizedBox(height: 10),
-
                   Text(
                     '$movieOverview',
                     style: TextStyle(
@@ -99,9 +110,7 @@ class _DetailPageState extends State<DetailPage> {
                     maxLines: 4,
                     overflow: TextOverflow.ellipsis,
                   ),
-
                   const SizedBox(height: 20),
-
                   ElevatedButton(
                     onPressed: () {},
                     style: ElevatedButton.styleFrom(
@@ -119,7 +128,6 @@ class _DetailPageState extends State<DetailPage> {
                       ),
                     ),
                   ),
-
                   const SizedBox(height: 30),
                 ],
               ),
