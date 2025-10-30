@@ -1,4 +1,4 @@
-// ignore_for_file: avoid_unnecessary_containers, unused_import
+// ignore_for_file: avoid_unnecessary_containers, unused_import, unused_local_variable
 
 import 'package:flutter/material.dart';
 import 'package:MovieList/model/GET.dart';

@@ -3,6 +3,7 @@
 import 'package:amicons/amicons.dart';
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
+
 class BottomNavbar extends StatelessWidget{
   void Function(int)? onTabChange;
   BottomNavbar({super.key, required this.onTabChange});

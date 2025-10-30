@@ -14,6 +14,7 @@ void main() async {
   await Supabase.initialize(
     url: 'https://tgngawbyutmabrogghlw.supabase.co',
     anonKey: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRnbmdhd2J5dXRtYWJyb2dnaGx3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjAwMzM2MzUsImV4cCI6MjA3NTYwOTYzNX0.IFqM3-sB2_NgnlnOHxlL1uIed8BS9froouZZMHabXEU',
+    headers: {'Content-Type': 'application/json;charset=UTF-8', 'api-key': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRnbmdhd2J5dXRtYWJyb2dnaGx3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjAwMzM2MzUsImV4cCI6MjA3NTYwOTYzNX0.IFqM3-sB2_NgnlnOHxlL1uIed8BS9froouZZMHabXEU'},
   );
   runApp(const MyApp());
   SystemChrome.setPreferredOrientations([
@@ -44,7 +45,7 @@ class MyApp extends StatelessWidget {
         '/list': (context) => Listpage(),
         '/account': (context) => Account(),
         '/search': (context) => Searchpage(),
-        '/detail': (context) => DetailPage(),
+        '/detail': (context) => Detailpage(),
       },
     );
   }
