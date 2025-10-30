@@ -68,8 +68,10 @@ class _HomePageState extends State<Homepage> {
                         'overview': movie.overview,
                         });}, 
                     splashColor: Colors.white10, 
-                    child: ClipRRect(borderRadius: BorderRadiusGeometry.circular(6), child: Image.network('https://image.tmdb.org/t/p/w500${movie.posterPath}'))), 
-                    Text( movie.title, style: const TextStyle(fontSize: 15, fontWeight: FontWeight.bold), overflow: TextOverflow.ellipsis,),
+                    child: ClipRRect(borderRadius: BorderRadiusGeometry.circular(6), child: Image.network( movie.posterPath != null 
+                      ? 'https://image.tmdb.org/t/p/w500${movie.posterPath}'
+                      : 'https://www.content.numetro.co.za/ui_images/no_poster.png',))), 
+                    Text(movie.title, style: const TextStyle(fontSize: 15, fontWeight: FontWeight.bold), overflow: TextOverflow.ellipsis,),
                 ]
                 )
               );

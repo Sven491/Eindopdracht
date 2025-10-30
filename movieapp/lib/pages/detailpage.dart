@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:amicons/amicons.dart';
 import 'package:flutter/material.dart';
 import 'package:MovieList/model/GET.dart';
@@ -33,37 +35,96 @@ class _DetailPageState extends State<DetailPage> {
   @override
   Widget build(BuildContext context) {
     final args = ModalRoute.of(context)!.settings.arguments as Map;
-
     final String movieTitle = args['title'];
-    final String movieImage = args['posterPath'];
+    final String? movieImage = args['posterPath'];
     final String movieOverview = args['overview'];
 
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Detail Page'),
+      extendBodyBehindAppBar: true,
+       appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        iconTheme: const IconThemeData(color: Colors.white),
       ),
-      body: Column(
+      body: Stack(
         children: [
-          Center ( child:
-          Text('$movieTitle', style: const TextStyle(fontSize: 40, color: Colors.white)),
+          SizedBox.expand(
+            child:  Image.network( (movieImage != null && movieImage!.isNotEmpty)
+            ? 'https://image.tmdb.org/t/p/w500$movieImage'
+            : 'https://www.content.numetro.co.za/ui_images/no_poster.png', fit: BoxFit.cover,)    
           ),
-          Image.network('https://image.tmdb.org/t/p/w500$movieImage', height: 200,),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child:
-              Text('$movieOverview', style: TextStyle(fontSize: 16, color: Colors.white)),
+
+          BackdropFilter(
+            filter: ImageFilter.blur(sigmaX: 12, sigmaY: 12),
+            child: Container(color: Colors.black.withOpacity(0.3)),
+          ),
+          Container(
+            decoration: const BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+                colors: [
+                  Colors.transparent,
+                  Colors.black87,
+                ],
               ),
-          Row(
-            children: [
-              TextButton(
-                onPressed: () {}, 
-                child: Text('Hello', style: TextStyle(fontSize: 20, color: Colors.white, fontWeight: FontWeight.bold),),
-                style: TextButton.styleFrom(
-                  foregroundColor: Colors.red,),
-                ),
-              ElevatedButton(onPressed: () {}, child: Icon( Amicons.iconly_heart_fill, color: Colors.white,),)
-            ],
+            ),
           ),
+          Align(
+            alignment: Alignment.bottomCenter,
+            child: Padding(
+              padding: const EdgeInsets.all(20),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+
+                  Text(
+                    '$movieTitle',
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontSize: 28,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+
+                  const SizedBox(height: 10),
+
+                  Text(
+                    '$movieOverview',
+                    style: TextStyle(
+                      color: Colors.white.withOpacity(0.9),
+                      fontSize: 15,
+                    ),
+                    maxLines: 4,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+
+                  const SizedBox(height: 20),
+
+                  ElevatedButton(
+                    onPressed: () {},
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.yellow[700],
+                      padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 14),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                    ),
+                    child: const Text(
+                      "Add to Watchlist",
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+
+                  const SizedBox(height: 30),
+                ],
+              ),
+            ),
+          )
         ],
       ),
     );
