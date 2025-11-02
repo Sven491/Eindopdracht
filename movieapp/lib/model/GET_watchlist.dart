@@ -1,4 +1,4 @@
-import 'dart:convert';
+/* import 'dart:convert';
 
 Watchlist watchlistFromJson(String str) => Watchlist.fromJson(json.decode(str));
 
@@ -30,4 +30,4 @@ class Watchlist {
         "movie_id": movieId,
         "created_at": createdAt.toIso8601String(),
     };
-}
+} */

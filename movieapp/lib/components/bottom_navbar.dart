@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors_in_immutables, avoid_unnecessary_containers
+// ignore_for_file: prefer_const_constructors_in_immutables, avoid_unnecessary_containers, must_be_immutable
 
 import 'package:amicons/amicons.dart';
 import 'package:flutter/material.dart';

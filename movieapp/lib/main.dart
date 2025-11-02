@@ -1,3 +1,6 @@
+// ignore_for_file: unnecessary_import
+
+import 'package:flutter/rendering.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:MovieList/pages/account.dart';
 import 'package:MovieList/pages/homepage.dart';

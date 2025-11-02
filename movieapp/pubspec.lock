@@ -201,10 +201,10 @@ packages:
     dependency: transitive
     description:
       name: font_awesome_flutter
-      sha256: ef8e9591f6de2bf671c3b6f506f5ff85f03d34403084fccced62d3628fb086b9
+      sha256: b9011df3a1fa02993630b8fb83526368cf2206a711259830325bab2f1d2a4eb0
       url: "https://pub.dev"
     source: hosted
-    version: "10.11.0"
+    version: "10.12.0"
   form_builder_phone_field:
     dependency: transitive
     description:
@@ -417,10 +417,10 @@ packages:
     dependency: transitive
     description:
       name: phone_numbers_parser
-      sha256: f95f15494536712cf6c5c4303bd7c4dae788863184d2dff03fda5e084a623c01
+      sha256: cfd5217cd1c132f3cd07d7b91f29a44219333bb1723c0480044a9cbac0e47eed
       url: "https://pub.dev"
     source: hosted
-    version: "9.0.15"
+    version: "9.0.16"
   platform:
     dependency: transitive
     description:
