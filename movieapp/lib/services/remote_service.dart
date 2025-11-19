@@ -2,6 +2,40 @@ import 'package:MovieList/model/GET.dart';
 import 'package:MovieList/model/GET_actor.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:http/http.dart' as http;
+import 'dart:convert';
+
+class RemoteMovieService {
+  Future<Map<String, dynamic>?> getMovie(int movieId) async {
+    var uri = Uri.parse('https://api.themoviedb.org/3/movie/$movieId');
+
+    var response = await http.get(uri, headers: {
+      'Authorization': 'bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJiY2MxN2M2ZmMwZWYyODlhYWZlOGNiMDM0YzI5NzZiYiIsIm5iZiI6MTc1ODAxNjMwNy4xODMsInN1YiI6IjY4YzkzMzMzMGRhZDgwMjliNGU1MWFhYSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.GomQJqzYbrQLRXKj4MZGOxUY2nI2sEbg9Rm9P_IK3PM',
+      'Content-Type': 'application/json;charset=utf-8',
+    });
+
+    if (response.statusCode == 200) {
+      return jsonDecode(response.body);
+    }
+
+    return null;
+  }
+}
+
+class RemoteDetailService {
+  Future<Map<String, dynamic>?> getMovie(int movieId) async {
+    var uri = Uri.parse('https://api.themoviedb.org/3/movie/$movieId');
+    var response = await http.get(uri, headers: {
+      'Authorization': 'bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJiY2MxN2M2ZmMwZWYyODlhYWZlOGNiMDM0YzI5NzZiYiIsIm5iZiI6MTc1ODAxNjMwNy4xODMsInN1YiI6IjY4YzkzMzMzMGRhZDgwMjliNGU1MWFhYSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.GomQJqzYbrQLRXKj4MZGOxUY2nI2sEbg9Rm9P_IK3PM',
+      'Content-Type': 'application/json;charset=utf-8',
+    });
+
+    if (response.statusCode == 200) {
+      return jsonDecode(response.body);
+    }
+
+    return null;
+  }
+}
 
 class RemoteDiscoveryService {
   Future<TmdbDiscover?> getDiscovery() async {
@@ -26,10 +60,7 @@ class RemoteSearchService {
   Future<TmdbDiscover?> getSearch(String query) async {
     var client = http.Client();
 
-    var uri = Uri.https(
-      'api.themoviedb.org',
-      '/3/search/movie',
-      {'query': query},);
+    var uri = Uri.parse('https://api.themoviedb.org/3/search/movie?query=$query');
     var response = await client.get(uri, headers: {
       'Authorization': 'bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJiY2MxN2M2ZmMwZWYyODlhYWZlOGNiMDM0YzI5NzZiYiIsIm5iZiI6MTc1ODAxNjMwNy4xODMsInN1YiI6IjY4YzkzMzMzMGRhZDgwMjliNGU1MWFhYSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.GomQJqzYbrQLRXKj4MZGOxUY2nI2sEbg9Rm9P_IK3PM',
       'Content-Type': 'application/json;charset=utf-8',
@@ -106,5 +137,24 @@ class RemoteActorService {
     }
 
     return null;
+  }
+}
+
+class RemoteGenreService {
+  Future<List<Genre>> getGenres(int movieId) async {
+    var uri = Uri.parse('https://api.themoviedb.org/3/movie/$movieId');
+    var response = await http.get(uri, headers: {
+      'Authorization': 'bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJiY2MxN2M2ZmMwZWYyODlhYWZlOGNiMDM0YzI5NzZiYiIsIm5iZiI6MTc1ODAxNjMwNy4xODMsInN1YiI6IjY4YzkzMzMzMGRhZDgwMjliNGU1MWFhYSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.GomQJqzYbrQLRXKj4MZGOxUY2nI2sEbg9Rm9P_IK3PM',
+      'Content-Type': 'application/json;charset=utf-8',
+    });
+
+    if (response.statusCode == 200) {
+      final data = jsonDecode(response.body);
+
+      final genreList = data['genres'] as List<dynamic>;
+      return genreList.map((g) => Genre.fromJson(g)).toList();
+    }
+
+    return [];
   }
 }

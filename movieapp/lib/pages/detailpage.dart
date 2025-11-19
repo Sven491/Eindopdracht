@@ -25,10 +25,13 @@ class _DetailPageState extends State<Detailpage> {
   late String movieTitle;
   late int movieId;
   late String movieOverview;
+  late String movieRelease;
   late String? movieImage;
   late String? userId;
   bool _argsInitialized = false;
+  bool isExpanded = false;
   late SupabaseClient supabase;
+  List<Genre> genres = [];
 
   @override 
   void initState() {
@@ -37,31 +40,47 @@ class _DetailPageState extends State<Detailpage> {
     supabase = Supabase.instance.client;
     getData();
   }
+@override
+void didChangeDependencies() {
+  super.didChangeDependencies();
+  if (!_argsInitialized) {
+    final args = ModalRoute.of(context)?.settings.arguments as Map?;
+    if (args != null) {
+      setState(() {
+        movieTitle = args['title'] ?? '';
+        movieId = args['id'] ?? 0;
+        movieOverview = args['overview'] ?? '';
+        movieImage = args['posterPath'] as String?;
 
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    if (!_argsInitialized) {
-      final args = ModalRoute.of(context)?.settings.arguments as Map?;
-      if (args != null) {
-        setState(() {
-          movieTitle = args['title'] ?? '';
-          movieId = args['id'] ?? 0;
-          movieOverview = args['overview'] ?? '';
-          movieImage = args['posterPath'] as String?;
-        });
-        userId = supabase.auth.currentUser?.id;
-        checkWatchlist(movieId);
-          RemoteActorService().getActor(movieId).then((actors) {
-            setState(() {
-              actorMovies = actors;
-            });
-      _argsInitialized = true;
+        final rawRelease = args['releaseDate'];
+        if (rawRelease is DateTime) {
+          movieRelease = rawRelease.toIso8601String().split('T').first;
+        } else if (rawRelease != null && rawRelease.toString().trim().isNotEmpty) {
+          movieRelease = rawRelease.toString();
+        } else {
+          movieRelease = 'Unknown';
+        }
       });
 
+      userId = supabase.auth.currentUser?.id;
+      checkWatchlist(movieId);
+      RemoteActorService().getActor(movieId).then((actors) {
+        setState(() {
+          actorMovies = actors;
+        });
+      });
+
+      RemoteGenreService().getGenres(movieId).then((genreList) {
+        setState(() {
+          genres = genreList;
+        });
+      });
+
+      _argsInitialized = true;
     }
   }
-  }
+}
+
 
   getData() async{
     final tmdbData = await RemoteDiscoveryService().getDiscovery();
@@ -162,16 +181,29 @@ class _DetailPageState extends State<Detailpage> {
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    const SizedBox(height: 10),
-                    Text(
-                      '$movieOverview',
-                      style: TextStyle(
-                        color: Colors.white.withOpacity(0.9),
-                        fontSize: 15,
-                      ),
-                      maxLines: 4,
-                      overflow: TextOverflow.ellipsis,
+                    Row(
+                      children: [
+                        Text('$movieRelease  ', style: TextStyle(fontStyle: FontStyle.italic, color: Colors.grey[500])), 
+                        Text('·', style: TextStyle(fontSize: 40, color: Colors.grey[500], fontWeight: FontWeight.bold)),
+                        Text(genres.map((g) => g.name).join(', '), style: TextStyle(fontStyle: FontStyle.italic, color: Colors.grey[500]),),
+                      ]
                     ),
+                    GestureDetector(
+                       onTap: () {
+                          setState(() {
+                            isExpanded = !isExpanded;
+                          });
+                        },
+                      child: Text(
+                          movieOverview,
+                          maxLines: isExpanded ? null : 4,
+                          overflow: isExpanded ? TextOverflow.visible : TextOverflow.ellipsis,
+                          style: TextStyle(
+                            color: Colors.white.withOpacity(0.9),
+                            fontSize: 15,
+                          ),
+                        ),
+                      )                    ,
                     const SizedBox(height: 20),
                     IconButton(
                       icon: Icon(
@@ -215,30 +247,40 @@ class _DetailPageState extends State<Detailpage> {
                     ),
                     const SizedBox(height: 30),
                     SizedBox(   
-                      child: ListView.builder(
+                      height: 250,
+                      child: actorMovies == null
+                        ? const Center(child: CircularProgressIndicator())
+                        :ListView.builder(
                         scrollDirection: Axis.horizontal,
                         itemCount: actorMovies?.cast.length,
                         itemBuilder:(context, index) {
                           final castmember = actorMovies!.cast[index];
-                          return Container(
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(12),
+                          return Padding(
+                            padding: const EdgeInsets.only(left: 4.5, right: 4.5),
+                            child: Container(
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(12),
+                              ),
+                              child: Column (
+                              children: [
+                                ClipRRect(borderRadius: BorderRadiusGeometry.circular(10), child: 
+                                SizedBox(height: 200, child: Image.network( castmember.profilePath != null 
+                                  ? 'https://image.tmdb.org/t/p/w500${castmember.profilePath}'
+                                  : 'https://www.content.numetro.co.za/ui_images/no_poster.png',
+                                  fit: BoxFit.cover,
+                                  height: 140,
+                                  width: 200,))
+                                  ), 
+                                  Text(castmember.name, style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.white), overflow: TextOverflow.ellipsis),
+                                  Text(castmember.character!, style: const TextStyle(fontSize: 10, color: Colors.white), overflow: TextOverflow.ellipsis),
+                              ]
+                              )
                             ),
-                            child: Column (
-                            children: [
-                              ClipRRect(borderRadius: BorderRadiusGeometry.circular(10), child: 
-                              SizedBox(height: 200, child: Image.network( castmember.profilePath != null 
-                                ? 'https://image.tmdb.org/t/p/w500${castmember.profilePath!}'
-                                : 'https://www.content.numetro.co.za/ui_images/no_poster.png',))
-                                ), 
-                                Text(castmember.name, style: const TextStyle(fontSize: 21, fontWeight: FontWeight.bold, color: Colors.white, overflow: TextOverflow.ellipsis,),),
-                                Text(castmember.character!, style: const TextStyle(fontSize: 15, color: Colors.white, overflow: TextOverflow.ellipsis,),),
-                            ]
-                            )
                           );
                         }
-                           ),
+                        ),   
                     )
+
                   ],
                 ),
               ),

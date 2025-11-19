@@ -34,9 +34,26 @@ class TmdbDiscover {
     };
 }
 
+class Genre {
+  int id;
+  String name;
+
+  Genre({required this.id, required this.name});
+
+  factory Genre.fromJson(Map<String, dynamic> json) => Genre(
+        id: json["id"],
+        name: json["name"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "id": id,
+        "name": name,
+      };
+}
+
 class Result {
     bool adult;
-    String backdropPath;
+    String? backdropPath;
     List<int> genreIds;
     int id;
     String originalLanguage;
@@ -53,7 +70,7 @@ class Result {
     Result({
         required this.adult,
         required this.backdropPath,
-        required this.genreIds,
+        this.genreIds = const [],
         required this.id,
         required this.originalLanguage,
         required this.originalTitle,
@@ -68,16 +85,16 @@ class Result {
     });
 
     factory Result.fromJson(Map<String, dynamic> json) => Result(
+        id: json["id"],
         adult: json["adult"],
         backdropPath: json["backdrop_path"],
-        genreIds: List<int>.from(json["genre_ids"].map((x) => x)),
-        id: json["id"],
+        genreIds: List<int>.from(json["genre_ids"] ?? []),
         originalLanguage: json["original_language"],
         originalTitle: json["original_title"],
         overview: json["overview"],
         popularity: json["popularity"]?.toDouble(),
         posterPath: json["poster_path"],
-        releaseDate: DateTime.parse(json["release_date"]),
+        releaseDate: (json["release_date"] != null && json["release_date"] != "")? DateTime.parse(json["release_date"]): DateTime(1900),
         title: json["title"],
         video: json["video"],
         voteAverage: json["vote_average"]?.toDouble(),
@@ -87,7 +104,6 @@ class Result {
     Map<String, dynamic> toJson() => {
         "adult": adult,
         "backdrop_path": backdropPath,
-        "genre_ids": List<dynamic>.from(genreIds.map((x) => x)),
         "id": id,
         "original_language": originalLanguage,
         "original_title": originalTitle,

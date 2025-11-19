@@ -66,6 +66,7 @@ class _HomePageState extends State<Homepage> {
                         'title': movie.title,
                         'posterPath': movie.posterPath,
                         'overview': movie.overview,
+                        'releaseDate': movie.releaseDate,
                         });}, 
                     splashColor: Colors.white10, 
                     child: ClipRRect(borderRadius: BorderRadiusGeometry.circular(6), child: Image.network( movie.posterPath != null 

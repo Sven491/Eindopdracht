@@ -9,72 +9,68 @@ import 'package:flutter/material.dart';
 class MainPage extends StatefulWidget {
   const MainPage({super.key});
 
-@override
+  @override
   State<MainPage> createState() => _MainPageState();
 }
 
 class _MainPageState extends State<MainPage> {
-
   int currentindex = 0;
+
   void navigateBottomBar(int index) {
     setState(() {
       currentindex = index;
-    });  
-    }
+    });
+  }
 
   final List<Widget> pages = [
     const Homepage(),
-    const Searchpage(),
-    const Listpage(),
-    const Account(),
+    const SearchPage(),
+    const ListPage(),
+    const AccountPage(),
   ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFF121212),
-        /* drawer: Drawer(
-        child: ListView(
-        padding: EdgeInsets.zero,
-        children: [
-          DrawerHeader(
-            decoration: BoxDecoration(
-            image: DecorationImage(
-              image: AssetImage('assets/images/Movielist_logo.png'),
-              fit: BoxFit.cover,
-            ),
-          ), 
-          child: null,
-          ),
-          ListTile(
-            title: const Text('Home'),
-            onTap: () {
-            Navigator.pushNamed(context, '/home');
-            Navigator.pop(context);},
-          ),
-          ListTile(
-            title: const Text('Watchlist'),
-            onTap: () {
-            Navigator.pushNamed(context, '/list');
-            Navigator.pop(context);},
-          ),
-          ListTile(
-            title: const Text('account'),
-            onTap: () {
-            Navigator.pushNamed(context, '/account');
-            Navigator.pop(context);},
-          ),
-        ],
-      ),
-    ), */
+      backgroundColor: const Color(0xFF121212),
       appBar: AppBar(
-        title: Text('MovieLovr.'),
-        backgroundColor: Color(0xFF330101),
+        elevation: 0,
+        backgroundColor: const Color(0xFF1C1C2E),
+        title: const Text(
+          'MovieLovr.',
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            fontSize: 24,
+            color: Colors.white70,
+            letterSpacing: 1.2,
+          ),
+        ),
+        centerTitle: true,
+        leading: GestureDetector(
+          onTap: () {
+            navigateBottomBar(0);
+          },
+          child: Image.asset(
+            'assets/images/Movielist_logo.png',
+            height: 30,
+            width: 30,
+          ),
+        ),
       ),
-      bottomNavigationBar: BottomNavbar(
-        onTabChange: (index) => navigateBottomBar(index),
-      ),    
+      bottomNavigationBar: Container(
+        decoration: const BoxDecoration(
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black54,
+              blurRadius: 8,
+            ),
+          ],
+        ),
+        child: BottomNavbar(
+          onTabChange: (index) => navigateBottomBar(index),
+        ),
+      ),
       body: pages[currentindex],
     );
   }
-  }
+}
