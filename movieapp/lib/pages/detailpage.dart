@@ -2,7 +2,6 @@
 
 import 'dart:ui';
 import 'package:MovieList/model/GET.dart';
-import 'package:MovieList/model/GET_watchlist.dart';
 import 'package:MovieList/services/remote_service.dart';
 import 'package:amicons/amicons.dart';
 import 'package:flutter/material.dart';

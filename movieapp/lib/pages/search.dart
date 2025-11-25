@@ -46,8 +46,8 @@ class _SearchPageState extends State<SearchPage> {
           decoration: const InputDecoration(
             hintText: 'Search for a movie...',
             hintStyle: TextStyle(color: Colors.grey),
-            border: InputBorder.none,
-          ),
+            enabledBorder: OutlineInputBorder(borderRadius: BorderRadius.all(Radius.circular(8)),)),
+          
           onSubmitted: _performSearch,
         ),
         actions: [
@@ -105,7 +105,7 @@ class _SearchPageState extends State<SearchPage> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
-                                    movie.title ?? 'Unknown title',
+                                    movie.title,
                                     style: const TextStyle(
                                       color: Colors.white,
                                       fontSize: 18,
@@ -120,7 +120,7 @@ class _SearchPageState extends State<SearchPage> {
                                   ),
                                   const SizedBox(height: 10),
                                   Text(
-                                    movie.overview ?? 'No description available',
+                                    movie.overview,
                                     style: const TextStyle(color: Colors.white70),
                                     maxLines: 3,
                                     overflow: TextOverflow.ellipsis,

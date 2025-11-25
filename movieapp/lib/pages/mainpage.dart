@@ -46,10 +46,8 @@ class _MainPageState extends State<MainPage> {
           ),
         ),
         centerTitle: true,
-        leading: GestureDetector(
-          onTap: () {
-            navigateBottomBar(0);
-          },
+        leading: Opacity(
+            opacity: 0.7,
           child: Image.asset(
             'assets/images/Movielist_logo.png',
             height: 30,

@@ -58,9 +58,18 @@ class _ListPageState extends State<ListPage> {
     return Scaffold(
       backgroundColor: Colors.black,
       appBar: AppBar(
-        title: const Text("My Watchlist", style: TextStyle(color: Colors.white)),
-        backgroundColor: Colors.transparent,
         elevation: 0,
+        backgroundColor: const Color(0xFF1C1C2E),
+        title: const Text(
+          'Watchlist',
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            fontSize: 24,
+            color: Colors.white70,
+            letterSpacing: 1.2,
+          ),
+        ),
+        centerTitle: true,
       ),
 
       body: isLoaded == false
