@@ -20,7 +20,7 @@ class _HomePageState extends State<Homepage> {
     super.initState();
     getData();
   }
-
+  // Ophalen van data vanuit de remote service
   getData() async {
     discoverMovies = await RemoteDiscoveryService().getDiscovery();
     if (discoverMovies != null) {
@@ -30,6 +30,7 @@ class _HomePageState extends State<Homepage> {
     }
   }
 
+  // Discover pagina met gried view van films
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -55,6 +56,7 @@ class _HomePageState extends State<Homepage> {
         ),
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+          // de gridview
           child: GridView.builder(
             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 2,

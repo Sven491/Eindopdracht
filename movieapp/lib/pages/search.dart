@@ -5,6 +5,8 @@ import 'package:MovieList/services/remote_service.dart';
 import 'package:MovieList/model/GET.dart';
 import 'package:amicons/amicons.dart';
 
+// zoekpagina die na het invullen van query een gridview bouwt
+
 class SearchPage extends StatefulWidget {
   const SearchPage({super.key});
 

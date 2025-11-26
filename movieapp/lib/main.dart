@@ -40,6 +40,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         scaffoldBackgroundColor: const Color(0xFF121212),
         useMaterial3: true,),
+        // Check of ingelogde sessie aanwezig is -> anders naar inlogpagina
       home: session != null ? const MainPage() : const LoginPage(),
       initialRoute: '/',
       routes: {

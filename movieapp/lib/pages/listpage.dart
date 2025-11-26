@@ -52,7 +52,7 @@ class _ListPageState extends State<ListPage> {
       isLoaded = true;
     });
   }
-
+  // tonen van opgehaalde watchlist
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -71,7 +71,6 @@ class _ListPageState extends State<ListPage> {
         ),
         centerTitle: true,
       ),
-
       body: isLoaded == false
           ? const Center(child: CircularProgressIndicator())
           : watchlistMovies.isEmpty

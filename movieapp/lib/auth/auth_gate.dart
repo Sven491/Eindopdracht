@@ -1,3 +1,4 @@
+/*
 import 'package:MovieList/pages/loginpage.dart';
 import 'package:MovieList/pages/mainpage.dart';
 import 'package:flutter/material.dart';
@@ -30,3 +31,4 @@ class AuthGate extends StatelessWidget{
     );
   }
 }
+*/

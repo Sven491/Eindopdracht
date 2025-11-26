@@ -6,6 +6,7 @@ MovieLovr is a Flutter-based mobile application designed for film enthusiasts. I
 ## Features
 
 *   *User Authentication*: Secure sign-up, login, and sign-out functionality powered by Supabase.
+*   *Framed Pages*: Smooth transitions ensured by page-in-frame design and bottombar. 
 *   *Discover Movies*: Browse a curated list of movies on the main page.
 *   *Movie Search*: Find specific movies by title using the search functionality.
 *   *Detailed Information*: View detailed information for each movie, including the overview, release date, cast, and genres.

@@ -73,7 +73,7 @@ class _AccountPageState extends State<AccountPage> {
     }
   }
 
-  //
+  // Verwijdert accountdata en logt uit
   Future<void> _deleteAccountClientSide() async {
     if (userId == null) return;
     final confirmed = await _confirmDialog(
@@ -115,6 +115,7 @@ class _AccountPageState extends State<AccountPage> {
   }
 
 
+  // Automatisch avatar aan de hand van initialen email-adres
   Widget _buildActionTile({required IconData icon, required String title, required String subtitle, required VoidCallback onTap, Color? iconColor}) {
     return Card(
       color: const Color(0xFF1C1C2E),
@@ -132,6 +133,7 @@ class _AccountPageState extends State<AccountPage> {
     );
   }
 
+  //body
   @override
   Widget build(BuildContext context) {
     final initials = (userEmail != null && userEmail!.isNotEmpty) ? userEmail![0].toUpperCase() : '?';

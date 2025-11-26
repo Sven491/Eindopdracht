@@ -21,14 +21,13 @@ class _MainPageState extends State<MainPage> {
       currentindex = index;
     });
   }
-
   final List<Widget> pages = [
     const Homepage(),
     const SearchPage(),
     const ListPage(),
     const AccountPage(),
   ];
-
+  // Frame om pagina's heen, titel/logo balk en bottom navbar
   @override
   Widget build(BuildContext context) {
     return Scaffold(

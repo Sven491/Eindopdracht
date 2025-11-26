@@ -39,6 +39,7 @@ class _DetailPageState extends State<Detailpage> {
     supabase = Supabase.instance.client;
     getData();
   }
+  // Ophalen van info film via route argumenten
 @override
 void didChangeDependencies() {
   super.didChangeDependencies();
@@ -91,7 +92,7 @@ void didChangeDependencies() {
     }
   }
 
-
+  // Check of hij in watchlist staat
   Future<bool> checkWatchlist(int movieId, {bool updateState = true}) async {
     final supabase = Supabase.instance.client;
     final userId = supabase.auth.currentUser?.id;
@@ -204,6 +205,7 @@ void didChangeDependencies() {
                         ),
                       )                    ,
                     const SizedBox(height: 20),
+                    // Kleur afhankelijk van in watchlist of niet
                     IconButton(
                       icon: Icon(
                       Amicons.flaticon_heart_rounded_fill
@@ -245,6 +247,8 @@ void didChangeDependencies() {
                       ),
                     ),
                     const SizedBox(height: 30),
+                    // Acteurs horizontale lijst
+                    const Text('Cast', style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold, color: Colors.white)),
                     SizedBox(   
                       height: 250,
                       child: actorMovies == null

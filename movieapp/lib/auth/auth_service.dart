@@ -1,5 +1,6 @@
 import 'package:supabase_flutter/supabase_flutter.dart';
 
+// Controle van inlog informatie
 class AuthService {
   final SupabaseClient supabase = Supabase.instance.client;
 
